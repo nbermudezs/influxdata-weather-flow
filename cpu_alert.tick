@@ -1,0 +1,9 @@
+stream
+    // Select just the cpu measurement from our example database.
+    |from()
+        .measurement('cpu')
+    |alert()
+        .message('Oh no, CPU idle is down to {{ index .Fields "usage_idle" }}')
+        .crit(lambda: "usage_idle" < 100)
+        .slack()
+//        .channel('@nbermudezs')
